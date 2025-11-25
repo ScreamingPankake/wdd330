@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/project.js" defer></script>
+    <link rel="stylesheet" href="styles/project.css">
+    <title>recipe list</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul class="navlist">
+                <li><a href="">Recipes</a></li>
+                <li><a href="">Random Meal</a></li>
+                <li><a href="">Search By Catagory</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="recipes"></div>
+            <div class="modal" id="recipeModal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <img id="modal-img" src="" alt="" loading="lazy">
+                <h3>Ingredients:</h3>
+                <ul id="modal-ingredients"></ul>
+                <h3>Instructions:</h3>
+                <p id="modal-instructions"></p>
+              </div>
+            </div>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
