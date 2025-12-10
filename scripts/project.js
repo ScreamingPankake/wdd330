@@ -8,7 +8,7 @@ const modalInstructions = document.getElementById('modal-instructions');
 const modalClose = document.querySelector('.close');
 
 
-fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=chicken`)
+fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
     .then(res => res.json())
 
     .then(data => {
@@ -21,6 +21,7 @@ fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=chicken`)
         const image = document.createElement('img');
         image.src = recipe.strMealThumb;
         
+        console.log(data);
 
         card.appendChild(title);
         card.appendChild(image);
@@ -49,6 +50,31 @@ fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=chicken`)
     })
     .catch(err => console.error(err));
 
+function fillModal(recipe) {
+    const modal = document.querySelector("#recipeModal");
+    document.querySelector("#modal-title").textContent = recipe.strMeal;
+    document.querySelector("#modal-img").src = recipe.strMealThumb;
+
+    // Ingredients
+    const ingredientsList = document.querySelector("#modal-ingredients");
+    ingredientsList.innerHTML = "";
+
+    for (let i = 1; i <= 20; i++) {
+        let ingredient = recipe[`strIngredient${i}`];
+        let measure = recipe[`strMeasure${i}`];
+
+        if (ingredient && ingredient.trim() !== "") {
+            const li = document.createElement("li");
+            li.textContent = `${ingredient} - ${measure}`;
+            ingredientsList.appendChild(li);
+        }
+    }
+
+    document.querySelector("#modal-instructions").textContent =
+        recipe.strInstructions;
+
+    modal.style.display = "block";
+}
 
 modalClose.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -59,3 +85,19 @@ window.addEventListener('click', (e) => {
         modal.style.display = 'none';
     }
 });
+
+function openFullRecipe(id) {
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const meal = data.meals[0];
+            fillModal(meal);
+        });
+}
+
+const joke = document.querySelector('#joke');
+
+fetch('https://icanhazdadjoke.com/', { headers: { 'Accept': 'application/json' } })
+    .then(res => res.json())
+    .then(data => joke.textContent = data.joke)
+    .catch(() => joke.textContent = "Oops! Couldn't fetch a joke.");

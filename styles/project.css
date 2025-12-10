@@ -1,22 +1,59 @@
-
-:root {
-
+* {
+    font-family: "Roboto", sans-serif;
 }
+
+
+/* Nav Bar */
+
+.navbar {
+    background-color: lightgray;
+    display: flex;
+    padding-bottom: .75rem;
+    align-items: center;
+}
+
+.navlist {
+    list-style-type: none;
+    display: flex;
+    margin-left: auto;
+    padding-right: 2rem;
+}
+
+.navlist li {
+    padding: 2rem;
+}
+
+.navlist li a {
+    text-decoration: none;
+    color: black;
+}
+
+#title {
+    text-decoration: none;
+    color: black;
+    padding-left: 2rem;
+}
+
 
 /* Landing Page */
 
-
+#hero {
+    display: block;
+    width: 85%;
+    margin: auto;
+}
 
 /* Full Recipe List */
 
 .recipes {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     background-color: lightgray;
     padding: 1rem 0;
     border-radius: 10px;
+    justify-content: center;
 }
 
 .recipes div {
@@ -26,8 +63,8 @@
     background-color: lightblue;
     justify-content: center;
     text-align: center;
-    width: 350px;
-    height: 400px;
+    width: 300px;
+    height: 350px;
     padding: 1rem;
     box-shadow: 0 10px 10px rgba(0, 0, 0, .4);
     border-radius: 5px;
@@ -100,3 +137,19 @@
 
 
 /* Search By Catagory */
+
+#type-box {
+    padding: 1rem;
+}
+
+#type-box button{
+    margin: 4px;
+}
+
+#category-box {
+    padding: 1rem;
+}
+
+#category-box button {
+    margin: 4px;
+}
