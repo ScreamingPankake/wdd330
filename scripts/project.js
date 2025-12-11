@@ -35,8 +35,8 @@ fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
 
             modalIngredients.innerHTML = '';  
             for (let i = 1; i <= 20; i++) {
-                const ingredient = recipe[`strIngredient${i}`];
-                const measure = recipe[`strMeasure${i}`];
+                    const ingredient = recipe[`strIngredient${i}`];
+                    const measure = recipe[`strMeasure${i}`];
                 if (ingredient) {
                     const li = document.createElement('li');
                     li.textContent = `${ingredient} - ${measure}`;
@@ -76,9 +76,17 @@ function fillModal(recipe) {
     modal.style.display = "block";
 }
 
-modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
+if (modal && modalClose) {
+    modalClose.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -95,9 +103,21 @@ function openFullRecipe(id) {
         });
 }
 
-const joke = document.querySelector('#joke');
+const jokeContainer = document.getElementById('joke');
 
-fetch('https://icanhazdadjoke.com/', { headers: { 'Accept': 'application/json' } })
-    .then(res => res.json())
-    .then(data => joke.textContent = data.joke)
-    .catch(() => joke.textContent = "Oops! Couldn't fetch a joke.");
+// Function to fetch a joke only if #joke exists
+function getJoke() {
+    if (!jokeContainer) return; // prevent crash on pages without it
+
+    fetch('https://geek-jokes.sameerkumar.website/api?format=json')
+        .then(response => response.json())
+        .then(data => {
+            jokeContainer.textContent = data.joke; // <-- actually display it
+        })
+        .catch(error => {
+            console.error('Error fetching joke:', error);
+            jokeContainer.textContent = 'Failed to load a joke.';
+        });
+}
+
+getJoke();

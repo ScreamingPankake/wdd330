@@ -41,6 +41,12 @@
     display: block;
     width: 85%;
     margin: auto;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
+}
+
+#joke {
+    text-align: center;
+    font-size: 18px;
 }
 
 /* Full Recipe List */
